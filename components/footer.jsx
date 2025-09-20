@@ -1,16 +1,18 @@
-import Link from 'next/link';
-
 export function Footer() {
+    const year = new Date().getFullYear();
     return (
-        <footer className="pt-16 pb-12 sm:pt-24 sm:pb-16">
-            <p className="text-sm">
-                <Link
-                    href="https://docs.netlify.com/frameworks/next-js/overview/"
-                    className="decoration-dashed text-primary underline-offset-8"
-                >
-                    Next.js on Netlify
-                </Link>
-            </p>
+        <footer className="border-t border-slate-100 bg-white">
+            <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-4 py-8 text-sm text-slate-600 sm:flex-row">
+                <p>© {year} Spark Digital LLC — All rights reserved.</p>
+                <div className="flex items-center gap-4">
+                    <a href="#" className="transition hover:text-cyan-700 no-underline">
+                        Privacy
+                    </a>
+                    <a href="#" className="transition hover:text-cyan-700 no-underline">
+                        Terms
+                    </a>
+                </div>
+            </div>
         </footer>
     );
 }

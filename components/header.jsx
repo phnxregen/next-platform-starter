@@ -1,42 +1,37 @@
-import Image from 'next/image';
 import Link from 'next/link';
-import netlifyLogo from 'public/netlify-logo.svg';
-import githubLogo from 'public/images/github-mark-white.svg';
 
 const navItems = [
-    { linkText: 'Home', href: '/' },
-    { linkText: 'Revalidation', href: '/revalidation' },
-    { linkText: 'Image CDN', href: '/image-cdn' },
-    { linkText: 'Edge Function', href: '/edge' },
-    { linkText: 'Blobs', href: '/blobs' },
-    { linkText: 'Classics', href: '/classics' }
+    { label: 'Product', href: '/#product' },
+    { label: 'Features', href: '/#features' },
+    { label: 'About', href: '/about' },
+    { label: 'Contact', href: '/#contact' }
 ];
 
 export function Header() {
     return (
-        <nav className="flex flex-wrap items-center gap-4 pt-6 pb-12 sm:pt-12 md:pb-24">
-            <Link href="/">
-                <Image src={netlifyLogo} alt="Netlify logo" />
-            </Link>
-            {!!navItems?.length && (
-                <ul className="flex flex-wrap gap-x-4 gap-y-1">
-                    {navItems.map((item, index) => (
-                        <li key={index}>
-                            <Link href={item.href} className="inline-flex px-1.5 py-1 sm:px-3 sm:py-2">
-                                {item.linkText}
-                            </Link>
-                        </li>
+        <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-100">
+            <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
+                <Link href="/#home" className="flex items-center gap-3 no-underline" scroll>
+                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-700 text-white text-lg font-semibold shadow-sm">
+                        M
+                    </span>
+                    <span className="font-semibold tracking-tight text-slate-900">Marginality</span>
+                </Link>
+                <nav className="hidden items-center gap-6 text-sm text-slate-700 md:flex">
+                    {navItems.map((item) => (
+                        <Link key={item.href} href={item.href} className="transition hover:text-cyan-700 no-underline" scroll>
+                            {item.label}
+                        </Link>
                     ))}
-                </ul>
-            )}
-            <Link
-                href="https://github.com/netlify-templates/next-platform-starter"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden lg:inline-flex lg:ml-auto"
-            >
-                <Image src={githubLogo} alt="GitHub logo" className="w-7" />
-            </Link>
-        </nav>
+                </nav>
+                <Link
+                    href="/#contact"
+                    className="inline-flex items-center rounded-xl bg-cyan-700 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-cyan-600 no-underline"
+                    scroll
+                >
+                    Contact
+                </Link>
+            </div>
+        </header>
     );
 }
