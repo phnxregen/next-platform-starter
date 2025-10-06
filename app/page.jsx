@@ -18,7 +18,7 @@ function HeroSection() {
             <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-20 md:grid-cols-2">
                 <div>
                     <h1 className="text-4xl font-semibold leading-tight text-slate-900 md:text-5xl">
-                        Bible study with <span className="text-cyan-700">living margins</span>
+                        Bible study with <span className="text-primary">living margins</span>
                     </h1>
                     <p className="mt-4 text-lg text-slate-700">
                         Marginality helps you take structured, verse-linked margin entries, organize them into notebooks, and
@@ -27,7 +27,7 @@ function HeroSection() {
                     <div className="mt-6 flex items-center gap-3">
                         <Link
                             href="/#product"
-                            className="rounded-xl bg-cyan-700 px-5 py-3 text-white shadow-sm transition hover:bg-cyan-600"
+                            className="rounded-xl bg-primary px-5 py-3 text-white shadow-sm transition hover:bg-primary/85"
                         >
                             See the product
                         </Link>
@@ -153,7 +153,7 @@ function AboutSection() {
                         <li>Focus: Bible study software and research tools</li>
                         <li>
                             Contact:{' '}
-                            <a href="mailto:phoenix@marginality.app" className="text-cyan-700 underline-offset-4">
+                            <a href="mailto:phoenix@marginality.app" className="text-primary underline-offset-4">
                                 phoenix@marginality.app
                             </a>
                         </li>
@@ -187,7 +187,7 @@ function ContactSection() {
                     <div className="mt-6 space-y-1 text-sm text-slate-700">
                         <p>
                             <span className="font-medium">Email:</span>{' '}
-                            <a className="text-cyan-700 underline-offset-4" href="mailto:phoenix@marginality.app">
+                            <a className="text-primary underline-offset-4" href="mailto:phoenix@marginality.app">
                                 phoenix@marginality.app
                             </a>
                         </p>
@@ -209,7 +209,7 @@ function ContactSection() {
                             <input
                                 name="name"
                                 required
-                                className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:border-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-100"
+                                className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-[#f6cadb]"
                             />
                         </label>
                         <label className="text-sm text-slate-700">
@@ -218,7 +218,7 @@ function ContactSection() {
                                 type="email"
                                 name="email"
                                 required
-                                className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:border-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-100"
+                                className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-[#f6cadb]"
                             />
                         </label>
                         <label className="text-sm text-slate-700">
@@ -227,11 +227,11 @@ function ContactSection() {
                                 name="message"
                                 rows={5}
                                 required
-                                className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:border-cyan-700 focus:outline-none focus:ring-2 focus:ring-cyan-100"
+                                className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-[#f6cadb]"
                             ></textarea>
                         </label>
                         <button
-                            className="rounded-xl bg-cyan-700 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-cyan-600"
+                            className="rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-primary/85"
                             type="submit"
                         >
                             Send

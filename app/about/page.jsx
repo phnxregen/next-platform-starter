@@ -47,7 +47,7 @@ export default function AboutPage() {
         <div className="bg-white text-slate-800">
             <section className="bg-gradient-to-b from-white via-slate-50 to-white">
                 <div className="mx-auto flex max-w-5xl flex-col gap-6 px-4 py-20 text-center">
-                    <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-700">About</p>
+                    <p className="text-sm font-semibold uppercase tracking-[0.2em] text-primary">About</p>
                     <h1 className="text-4xl font-semibold leading-tight text-slate-900 md:text-5xl">
                         Spark Digital LLC builds tools for thoughtful, ordered Bible study
                     </h1>
@@ -77,7 +77,7 @@ export default function AboutPage() {
                             <p className="mt-2 text-sm text-slate-700">
                                 For licensing, partnerships, or press inquiries, reach out to
                                 <a
-                                    className="ml-1 text-cyan-700 underline-offset-4"
+                                    className="ml-1 text-primary underline-offset-4"
                                     href="mailto:phoenix@marginality.app"
                                 >
                                     phoenix@marginality.app
@@ -106,7 +106,7 @@ export default function AboutPage() {
                     <div className="mt-8 grid gap-6 md:grid-cols-3">
                         {timeline.map((entry) => (
                             <div key={entry.year} className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
-                                <p className="text-sm font-semibold uppercase tracking-wide text-cyan-700">{entry.year}</p>
+                                <p className="text-sm font-semibold uppercase tracking-wide text-primary">{entry.year}</p>
                                 <h3 className="mt-2 text-lg font-semibold text-slate-900">{entry.label}</h3>
                                 <p className="mt-2 text-sm text-slate-700">{entry.detail}</p>
                             </div>
@@ -125,7 +125,7 @@ export default function AboutPage() {
                     <div className="flex flex-wrap items-center justify-center gap-3">
                         <a
                             href="mailto:phoenix@marginality.app"
-                            className="rounded-xl bg-cyan-700 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-cyan-600"
+                            className="rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-primary/85"
                         >
                             Email the team
                         </a>
