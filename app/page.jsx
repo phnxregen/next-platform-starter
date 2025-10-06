@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 export default function Page() {
@@ -40,10 +41,16 @@ function HeroSection() {
                     </div>
                     <p className="mt-4 text-xs text-slate-500">Developed by Spark Digital LLC.</p>
                 </div>
-                <div className="relative">
-                    <div className="flex aspect-[16/10] items-center justify-center rounded-2xl bg-slate-200 text-slate-500 shadow-inner">
-                        App screenshot goes here
-                    </div>
+                <div className="relative flex justify-center">
+                    <Image
+                        src="/images/SWLightBibleSS.png"
+                        alt="Marginality app screenshot"
+                        width={1948}
+                        height={1896}
+                        sizes="(min-width: 768px) 480px, 100vw"
+                        className="w-full max-w-xl rounded-2xl border border-slate-200 shadow-xl"
+                        priority
+                    />
                 </div>
             </div>
         </section>
@@ -209,7 +216,7 @@ function ContactSection() {
                             <input
                                 name="name"
                                 required
-                                className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-[#f6cadb]"
+                                className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-[#e4cdd5]"
                             />
                         </label>
                         <label className="text-sm text-slate-700">
@@ -218,7 +225,7 @@ function ContactSection() {
                                 type="email"
                                 name="email"
                                 required
-                                className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-[#f6cadb]"
+                                className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-[#e4cdd5]"
                             />
                         </label>
                         <label className="text-sm text-slate-700">
@@ -227,7 +234,7 @@ function ContactSection() {
                                 name="message"
                                 rows={5}
                                 required
-                                className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-[#f6cadb]"
+                                className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-[#e4cdd5]"
                             ></textarea>
                         </label>
                         <button

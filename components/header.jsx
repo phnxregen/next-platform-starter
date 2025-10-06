@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 const navItems = [
@@ -12,9 +13,14 @@ export function Header() {
         <header className="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-slate-100">
             <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
                 <Link href="/#home" className="flex items-center gap-3 no-underline" scroll>
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white text-lg font-semibold shadow-sm">
-                        M
-                    </span>
+                    <Image
+                        src="/images/marginality_header.png"
+                        alt="Marginality logo"
+                        width={160}
+                        height={30}
+                        className="h-8 w-auto"
+                        priority
+                    />
                     <span className="font-semibold tracking-tight text-slate-900">Marginality</span>
                 </Link>
                 <nav className="hidden items-center gap-6 text-sm text-slate-700 md:flex">

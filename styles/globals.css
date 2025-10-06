@@ -9,9 +9,9 @@
         color-mix(in oklab, var(--color-neutral-950) 50%, transparent)
     ),
     url('/images/noise.png');
-    --color-primary: #ee81a5;
+    --color-primary: #a55972;
     --color-primary-content: #f8fafc;
-    --color-secondary: #f6cadb;
+    --color-secondary: #dbbdc7;
     --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
         'Noto Color Emoji';
 }
