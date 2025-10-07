@@ -112,7 +112,8 @@ const features = [
     },
     {
         title: 'Search & reference chips',
-        description: 'Search verse text; jump buttons group references (e.g., Gen 1:1–3, Exod 1:1).'
+        description:
+            'Search verse text; inline verse reference buttons recognize Scripture inside notes, show the note alongside its verses, and take you straight to the passage when clicked.'
     },
     {
         title: 'Import / Export',

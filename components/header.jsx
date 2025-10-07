@@ -21,7 +21,6 @@ export function Header() {
                         className="h-8 w-auto"
                         priority
                     />
-                    <span className="font-semibold tracking-tight text-slate-900">Marginality</span>
                 </Link>
                 <nav className="hidden items-center gap-6 text-sm text-slate-700 md:flex">
                     {navItems.map((item) => (
