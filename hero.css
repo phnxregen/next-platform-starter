@@ -17,7 +17,7 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple
 
 .hero{
   position:relative;
-  min-height:80vh;
+  min-height:100vh;
   overflow:clip;
   background:var(--bg);
 }
