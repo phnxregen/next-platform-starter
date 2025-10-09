@@ -15,9 +15,14 @@ export default function Page() {
 
 function HeroSection() {
     return (
-        <section id="home" className="bg-gradient-to-b from-white to-slate-50">
-            <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-20 md:grid-cols-2">
-                <div>
+        <section id="home" className="relative overflow-hidden">
+            <div
+                aria-hidden="true"
+                className="absolute inset-0 -z-10 bg-[url('/images/3dcoloredbackgroun.jpg')] bg-cover bg-center md:bg-[position:calc(50%+14rem)_center] xl:bg-[position:calc(50%+18rem)_center]"
+            />
+            <div aria-hidden="true" className="absolute inset-0 -z-10 bg-white/80 backdrop-blur-sm" />
+            <div className="relative mx-auto grid max-w-6xl items-center gap-10 px-4 py-20 md:grid-cols-[minmax(0,1fr)_auto] md:gap-12 lg:gap-16">
+                <div className="relative z-10 md:max-w-xl">
                     <h1 className="text-4xl font-semibold leading-tight text-slate-900 md:text-5xl">
                         Bible study with <span className="text-primary">living margins</span>
                     </h1>
@@ -41,7 +46,7 @@ function HeroSection() {
                     </div>
                     <p className="mt-4 text-xs text-slate-500">Developed by Spark Digital LLC.</p>
                 </div>
-                <div className="relative flex justify-center">
+                <div className="relative z-10 flex justify-center md:-translate-x-8 md:justify-start lg:-translate-x-12">
                     <Image
                         src="/images/SWLightBibleSS.png"
                         alt="Marginality app screenshot"
