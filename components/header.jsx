@@ -4,8 +4,7 @@ import Link from 'next/link';
 const navItems = [
     { label: 'Product', href: '/#product' },
     { label: 'Features', href: '/#features' },
-    { label: 'About', href: '/about' },
-    { label: 'Contact', href: '/#contact' }
+    { label: 'About', href: '/about' }
 ];
 
 export function Header() {
