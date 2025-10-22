@@ -10,9 +10,7 @@ type HeroCSSVars = React.CSSProperties & {
     "--scale": string;
     "--content-scale": string;
 };
-
-
-export function HeroSection() {
+function HeroSection() {
     const shotRef = useRef(null);
     const sectionRef = useRef(null);
 
