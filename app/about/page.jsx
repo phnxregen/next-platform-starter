@@ -58,9 +58,9 @@ export default function AboutPage() {
                                 For licensing, partnerships, or press inquiries, reach out to
                                 <a
                                     className="ml-1 text-primary underline-offset-4"
-                                    href="mailto:phoenix@marginality.app"
+                                    href="mailto:contact@marginality.app"
                                 >
-                                    phoenix@marginality.app
+                                    contact@marginality.app
                                 </a>
                                 .
                             </p>
@@ -89,7 +89,7 @@ export default function AboutPage() {
                     </p>
                     <div className="flex flex-wrap items-center justify-center gap-3">
                         <a
-                            href="mailto:phoenix@marginality.app"
+                            href="mailto:contact@marginality.app"
                             className="rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-primary/85"
                         >
                             Email Us

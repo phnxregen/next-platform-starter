@@ -297,8 +297,8 @@ function AboutSection() {
                 <li>Focus: Bible study software and research tools</li>
                 <li>
                 Contact:{" "}
-                <a href="mailto:phoenix@marginality.app" className="text-primary underline-offset-4">
-                    phoenix@marginality.app
+                <a href="mailto:contact@marginality.app" className="text-primary underline-offset-4">
+                    contact@marginality.app
                 </a>
                 </li>
             </ul>
@@ -330,8 +330,8 @@ function ContactSection() {
             <div className="mt-6 space-y-1 text-sm text-slate-700">
                 <p>
                 <span className="font-medium">Email:</span>{" "}
-                <a className="text-primary underline-offset-4" href="mailto:phoenix@marginality.app">
-                    phoenix@marginality.app
+                <a className="text-primary underline-offset-4" href="mailto:contact@marginality.app">
+                    contact@marginality.app
                 </a>
                 </p>
                 <p>
