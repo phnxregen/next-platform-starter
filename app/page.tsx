@@ -251,14 +251,14 @@ const features = [
         "Link entries to single verses or ranges; non-contiguous selections render cleanly (e.g., Lev 1:1–2, 6).",
     },
     { title: "Notebooks & tags", description: "Organize studies with notebooks; add pill-style tags with autocomplete for fast retrieval." },
-    { title: "Biblical & chronological views", description: "Browse entries either by canonical order or historical timeline of events." },
+    { title: "Biblical & sequential ordering", description: "Browse entries by canonical order, date made, or custom ordering." },
     {
-        title: "Search & reference chips",
+        title: "Searching & referencing",
         description:
-        "Search verse text; inline verse reference buttons recognize Scripture inside notes, show the note alongside its verses, and take you straight to the passage when clicked.",
+        "Search verse text; notes show alongside their associated verses and have buttons which take you to them. Inline verse reference buttons recognize Scripture inside notes.",
     },
     { title: "Import / Export", description: "Export as PDF or a structured import format; bulk tag edits and notebook moves." },
-    { title: "Studies (roadmap)", description: "Integrations for text/video/audio-based Bible studies, mapped to verse ranges." },
+    { title: "Studies & Communities (roadmap)", description: "Integrations for text/video/audio-based Bible studies, mapped to verse ranges; Community features, from small-group to church." },
 ];
 
 function FeaturesSection() {
