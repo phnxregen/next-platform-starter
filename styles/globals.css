@@ -1,22 +1,49 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700&family=Manrope:wght@200..800&display=swap');
 
 @import 'tailwindcss';
 
 @theme {
-    --background-image-noise: linear-gradient(
-        to bottom,
-        color-mix(in oklab, var(--color-neutral-950) 0%, transparent),
-        color-mix(in oklab, var(--color-neutral-950) 50%, transparent)
-    ),
-    url('/images/noise.png');
-    --color-primary: #a55972;
-    --color-primary-content: #f8fafc;
-    --color-secondary: #dbbdc7;
-    --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+    --background-image-noise:
+        linear-gradient(
+            to bottom,
+            color-mix(in oklab, var(--color-neutral-950) 0%, transparent),
+            color-mix(in oklab, var(--color-neutral-950) 50%, transparent)
+        ),
+        url('/images/noise.png');
+    --color-primary: #e0c465;
+    --color-primary-content: #23262c;
+    --color-secondary: #2b3237;
+    --font-sans:
+        'Manrope', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
         'Noto Color Emoji';
 }
 
 @layer base {
+    :root {
+        --ink: #2b3237;
+        --ink-deep: #23262c;
+        --paper: #dde3eb;
+        --paper-soft: #e9edf3;
+        --paper-bright: #f1f3f6;
+        --line: rgba(43, 50, 55, 0.12);
+        --line-strong: rgba(43, 50, 55, 0.2);
+        --accent-glow: rgba(224, 196, 101, 0.28);
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        background: var(--paper-bright);
+        color: var(--ink);
+    }
+
+    ::selection {
+        background: color-mix(in srgb, var(--color-primary) 45%, white);
+        color: var(--ink-deep);
+    }
+
     h1 {
         @apply text-4xl font-bold tracking-tight sm:text-5xl;
     }
@@ -30,11 +57,14 @@
     }
 
     a:not(.btn) {
-        @apply underline transition hover:opacity-80;
+        @apply underline transition;
+        text-underline-offset: 0.18em;
     }
 
     :not(pre) > code {
-        @apply px-1 py-0.5 font-mono rounded bg-neutral-900 text-yellow-200;
+        @apply px-1 py-0.5 font-mono rounded;
+        background: var(--ink-deep);
+        color: var(--color-primary);
         font-size: 0.9em;
     }
 }
@@ -62,10 +92,11 @@
         @apply inline-flex items-center justify-center gap-2 font-bold text-center no-underline transition-colors cursor-pointer bg-primary text-primary-content;
         padding: var(--btn-py, 0.875rem) var(--btn-px, 1.25rem);
         font-size: var(--btn-font-size, 0.875rem);
-        border-radius: var(--btn-border-radius, 0.25rem);
+        border-radius: var(--btn-border-radius, 0.9rem);
+        box-shadow: 0 18px 40px -24px rgba(35, 38, 44, 0.45);
 
         &:hover {
-            @apply bg-primary/85;
+            background: color-mix(in srgb, var(--color-primary) 88%, white);
         }
 
         &:disabled {
@@ -80,7 +111,9 @@
     }
 
     .input {
-        @apply px-4 py-3 text-sm border rounded-sm border-neutral-300 text-neutral-900 focus:border-primary focus:outline-3 focus:outline-primary/30;
+        @apply px-4 py-3 text-sm border rounded-xl text-neutral-900 focus:border-primary focus:outline-3 focus:outline-primary/30;
+        border-color: var(--line-strong);
+        background: rgba(255, 255, 255, 0.72);
     }
 
     .diff {
@@ -114,7 +147,9 @@
         transform: scaleY(3) translate(0.35rem, 0.08rem);
         transform-origin: 100% 100%;
         clip-path: inset(calc(100% - 0.75rem) 0 0 calc(100% - 0.75rem));
-        transition: min-width 0.3s ease-out, max-width 0.3s ease-out;
+        transition:
+            min-width 0.3s ease-out,
+            max-width 0.3s ease-out;
     }
 
     .diff-item-2 {
@@ -133,7 +168,8 @@
             backdrop-filter: blur(8px);
             pointer-events: none;
             z-index: 2;
-            box-shadow: inset 0 0 0 1px color-mix(in oklab, var(--color-gray-900) 5%, transparent),
+            box-shadow:
+                inset 0 0 0 1px color-mix(in oklab, var(--color-gray-900) 5%, transparent),
                 0 1px 3px 0 color-mix(in oklab, var(--color-gray-900) 20%, transparent);
         }
         @supports (-webkit-overflow-scrolling: touch) and (overflow: -webkit-paged-x) {

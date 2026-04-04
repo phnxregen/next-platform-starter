@@ -1,400 +1,402 @@
-"use client";
+import Image from 'next/image';
+import Link from 'next/link';
+import { HeroPreviewToggle } from '../components/hero-preview-toggle';
 
-import Image from "next/image";
-import Link from "next/link";
-import { useEffect, useRef } from "react";
+const productShots = [
+    {
+        src: '/images/verse_bank.png',
+        width: 590,
+        height: 484,
+        alt: 'Verse bank entries grouped by reference'
+    },
+    {
+        src: '/images/notebook_view.png',
+        width: 1180,
+        height: 1032,
+        alt: 'Notebook view showing organized study entries'
+    },
+    {
+        src: '/images/inline_buttons.png',
+        width: 548,
+        height: 382,
+        alt: 'Inline scripture buttons inside a note'
+    },
+    {
+        src: '/images/content.png',
+        width: 763,
+        height: 738,
+        alt: 'Study content connected to Scripture'
+    }
+];
 
-type HeroCSSVars = React.CSSProperties & {
-    "--shot-h": string;
-    "--shot-w": string;
-    "--scale": string;
-    "--content-scale": string;
-};
-function HeroSection() {
-    const shotRef = useRef(null);
-    const sectionRef = useRef(null);
-
-    useEffect(() => {
-        if (!shotRef.current || !sectionRef.current) return;
-        const section = sectionRef.current;
-        const shot = shotRef.current;
-
-        const update = () => {
-        const rect = shot.getBoundingClientRect();
-        const isDesktop = window.matchMedia('(min-width: 1024px)').matches;
-        
-        section.style.setProperty("--shot-h", `${rect.height}px`);
-        section.style.setProperty("--shot-w", `${rect.width}px`);
-        section.style.setProperty("--scale", `${rect.width / 520}`);
-        
-        // Calculate content scale based on breakpoint
-        if (isDesktop) {
-            // Desktop: scale based on available height vs reference height
-            // Use a slightly smaller reference to ensure content fits with some padding
-            const referenceHeight = 480; // Slightly smaller than 520px to add padding
-            const contentScale = Math.min(rect.height / referenceHeight, 1.2); // Cap at 1.2x to prevent oversizing
-            section.style.setProperty("--content-scale", `${contentScale}`);
-        } else {
-            // Mobile: scale based on width but ensure it doesn't get too small
-            const contentScale = Math.max(rect.width / 520, 0.6); // Minimum 60% size
-            section.style.setProperty("--content-scale", `${contentScale}`);
-        }
-        };
-
-        const ro = new ResizeObserver(update);
-        ro.observe(shot);
-        update();
-        return () => ro.disconnect();
-    }, []);
-
-    return (
-        <section
-            id="home"
-            ref={sectionRef}
-            className="relative overflow-hidden"
-            style={{
-                "--shot-h": "520px",
-                "--shot-w": "520px",
-                "--scale": "1",
-                "--content-scale": "1",
-            } as HeroCSSVars}
-        >
-        {/* Background */}
-        <div className="absolute inset-0 z-0">
-            <Image
-            src="/images/scaledwebbackground.png"
-            alt=""
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover object-bottom pointer-events-none select-none"
-            />
-        </div>
-
-        {/* Veil */}
-        <div aria-hidden="true" className="absolute inset-0 z-10 pointer-events-none md:bg-white/5" />
-
-        {/* Main layout */}
-        <div className="relative z-20 mx-auto max-w-6xl px-6 py-20 flex flex-col gap-12 lg:flex-row lg:items-start lg:justify-center lg:gap-8 xl:gap-10">
-            {/* TEXT RECTANGLE */}
-            <div
-            className="
-                flex flex-col
-                mx-auto lg:mx-0
-                w-full
-                lg:w-[450px]
-                lg:h-[var(--shot-h)]
-                lg:overflow-hidden
-                pt-2 lg:pt-0
-            "
-            style={{ 
-                gap: "calc(1.5rem * var(--content-scale))",
-                maxWidth: "min(100%, var(--shot-w))",
-                width: "min(100%, var(--shot-w))"
-            }}
-            >
-            {/* Title */}
-            <h1
-                className="
-                font-black text-slate-900 leading-[1.05] tracking-tight
-                text-left
-                text-[calc(60px*var(--content-scale))] lg:text-[calc(55.1876px*var(--content-scale))]
-                "
-                style={{ fontFamily: '"Arial Black", Arial, Helvetica, sans-serif' }}
-            >
-                Bible<br />
-                notes<br />
-                with <span className="[color:#d5769b]">Living</span><br />
-                <span className="[color:#d5769b] inline-block ml-0 lg:ml-[calc(8.965rem*var(--content-scale))]">Margins</span>
-            </h1>
-
-            {/* Body paragraph with fixed line breaks */}
-            <p
-                className="
-                text-center lg:text-left text-slate-700 leading-snug
-                text-[calc(21.1px*var(--content-scale))] lg:text-[calc(28px*var(--content-scale))]
-                "
-                style={{
-                marginTop: "calc(1.5rem * var(--content-scale))",
-                fontFamily:
-                    '"Futura Condensed Medium", Futura, "Futura PT", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif',
-                }}
-            >
-                Marginality helps you take<br />
-                structured, verse-linked note<br />
-                entries, organize them into<br />
-                notebooks, and view and<br />
-                manage them how you need.
-            </p>
-
-            {/* Buttons */}
-            <div className="flex justify-center lg:justify-start gap-3" style={{ marginTop: "calc(1rem * var(--content-scale))" }}>
-                <Link
-                href="/#product"
-                className="rounded-xl bg-primary px-5 py-3 text-white shadow-sm transition hover:bg-primary/85
-                            text-[calc(16px*var(--content-scale))] lg:text-[calc(16px*var(--content-scale))]"
-                >
-                Get the app
-                </Link>
-                <Link
-                href="/#contact"
-                className="rounded-xl border border-slate-200 bg-white/80 px-5 py-3 text-slate-700 transition hover:bg-white
-                            text-[calc(16px*var(--content-scale))] lg:text-[calc(16px*var(--content-scale))]"
-                >
-                Contact us
-                </Link>
-            </div>
-
-            {/* Footer credit */}
-            <p className="text-center lg:text-left text-slate-500 text-[calc(12px*var(--content-scale))] lg:text-[calc(12px*var(--content-scale))]" style={{ marginTop: "calc(1.5rem * var(--content-scale))" }}>
-                Developed by Spark Digital LLC.
-            </p>
-            </div>
-
-            {/* SCREENSHOT */}
-            <div
-            ref={shotRef}
-            className="mx-auto flex w-full justify-center lg:mx-0 lg:w-[520px]"
-            style={{ maxWidth: "min(100%, var(--shot-w))" }}
-            >
-            <Image
-                src="/images/SWLightBibleSS.png"
-                alt="Marginality app screenshot"
-                width={1948}
-                height={1896}
-                sizes="(min-width: 1024px) 520px, 100vw"
-                className="w-full max-w-xl lg:max-w-none lg:w-[520px] rounded-2xl border border-slate-200 shadow-xl"
-                style={{ filter: "drop-shadow(0 8px 18px rgba(0,0,0,0.35))" }}
-                priority
-            />
-            </div>
-        </div>
-        </section>
-    );
-}
-
-/* -------------------- PRODUCT -------------------- */
-function ProductSection() {
-    const productShots = [
-        {
-            src: "/images/verse_bank.png",
-            width: 590,
-            height: 484,
-            alt: "Verse bank entries grouped by reference",
-        },
-        {
-            src: "/images/notebook_view.png",
-            width: 1180,
-            height: 1032,
-            alt: "Notebook view showing organized study entries",
-        },
-        {
-            src: "/images/inline_buttons.png",
-            width: 548,
-            height: 382,
-            alt: "Inline scripture buttons inside a note",
-        },
-        {
-            src: "/images/export.png",
-            width: 1174,
-            height: 1014,
-            alt: "Export options for sharing studies",
-        },
-    ];
-
-    return (
-        <section id="product" className="bg-white">
-        <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 py-16 md:grid-cols-2">
-            <div className="space-y-4">
-            <h2 className="text-2xl font-semibold text-slate-900">What is Marginality?</h2>
-            <p className="text-slate-700">
-                Marginality is a Bible note-taking experience designed around the way readers have always engaged
-                Scripture — at the margins. Each entry can be linked to one or many verses, grouped into notebooks,
-                and searched through.
-            </p>
-            <ul className="list-disc space-y-2 pl-5 text-slate-700">
-                <li>
-                Verse-linked entries with clean, formatted references (e.g., <em>Genesis 1:1–2</em>).
-                </li>
-                <li>Organize with notebooks and tags; search by content or tag.</li>
-                <li>Inline verse referencing: recognized typed verses will turn into buttons.</li>
-                <li>Side margin panel for focused reading and writing.</li>
-                <li>Import / export for study sharing (PDF and structured formats).</li>
-            </ul>
-            <p className="text-sm text-slate-500">Mobile, desktop, and web experiences are under active development.</p>
-            </div>
-            <div className="grid grid-cols-2 gap-4">
-            {productShots.map((shot) => (
-                <div key={shot.src} className="flex items-center justify-center rounded-2xl border border-slate-200 bg-white p-2 shadow-sm">
-                <Image
-                    src={shot.src}
-                    alt={shot.alt}
-                    width={shot.width}
-                    height={shot.height}
-                    className="h-auto w-full rounded-xl object-contain"
-                    sizes="(min-width: 768px) 320px, 45vw"
-                    loading="lazy"
-                />
-                </div>
-            ))}
-            </div>
-        </div>
-        </section>
-    );
-}
-
-/* -------------------- FEATURES -------------------- */
 const features = [
     {
-        title: "Verse-linked margins",
+        title: 'Verse-linked notes',
         description:
-        "Link entries to single verses or ranges; non-contiguous selections render cleanly (e.g., Lev 1:1–2, 6).",
+            'Anchor your thoughts to Scripture. Notes stay tied to the verses they came from and remain easy to revisit while you read.'
     },
-    { title: "Notebooks & tags", description: "Organize studies with notebooks; add pill-style tags with autocomplete for fast retrieval." },
-    { title: "Biblical & sequential ordering", description: "Browse entries by canonical order, date made, or custom ordering." },
     {
-        title: "Searching & referencing",
+        title: 'Notebooks',
         description:
-        "Search verse text; notes show alongside their associated verses and have buttons which take you to them. Inline verse reference buttons recognize Scripture inside notes.",
+            'Keep long-running studies organized in notebooks with search and structure that stay out of the way.'
     },
-    { title: "Import / Export", description: "Export as PDF or a structured import format; bulk tag edits and notebook moves." },
-    { title: "Studies & Communities (roadmap)", description: "Integrations for text/video/audio-based Bible studies, mapped to verse ranges; Community features, from small-group to church." },
+    {
+        title: 'Verse references',
+        description:
+            'Add clean, clickable verse references inside your notes so you can move back into the text without losing context.'
+    },
+    {
+        title: 'Additional study tools',
+        description:
+            'Extend your study beyond the page with tools for connecting sermons, videos, and referenced passages.'
+    },
+    {
+        title: 'Flexible export',
+        description: 'Your notes remain yours. Export as PDF or importable files whenever you need them.'
+    }
 ];
+
+function HeroSection() {
+    return (
+        <section id="home" className="relative overflow-hidden bg-[var(--ink-deep)] text-white">
+            <div
+                aria-hidden="true"
+                className="absolute inset-0"
+                style={{
+                    background:
+                        'radial-gradient(72rem 44rem at -8% -10%, rgba(224, 196, 101, 0.22), rgba(224, 196, 101, 0.08) 34%, rgba(224, 196, 101, 0) 62%), radial-gradient(42rem 26rem at 78% 12%, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0) 68%), linear-gradient(180deg, #23262c 0%, #2b3237 52%, #23262c 100%)'
+                }}
+            />
+            <div
+                aria-hidden="true"
+                className="absolute inset-0 opacity-50"
+                style={{
+                    background:
+                        'linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 38%), linear-gradient(225deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 44%)'
+                }}
+            />
+            <div
+                aria-hidden="true"
+                className="absolute inset-x-0 top-0 h-px"
+                style={{ background: 'rgba(255,255,255,0.08)' }}
+            />
+
+            <div className="relative mx-auto grid max-w-6xl gap-14 px-6 pb-[4.5rem] pt-24 md:px-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(360px,0.95fr)] lg:items-center lg:gap-10 lg:pb-24 lg:pt-28">
+                <div className="max-w-2xl">
+                    <div className="space-y-6">
+                        <p className="text-lg font-medium" style={{ color: 'rgba(255,255,255,0.72)' }}>
+                            Marginality
+                        </p>
+                        <h1
+                            className="max-w-[10ch] text-5xl leading-none text-white sm:text-6xl lg:text-7xl"
+                            style={{ fontFamily: '"Fraunces", Georgia, serif' }}
+                        >
+                            Bible study with room to think in the margins.
+                        </h1>
+                        <p
+                            className="max-w-xl text-base leading-7 sm:text-lg"
+                            style={{ color: 'rgba(255,255,255,0.76)' }}
+                        >
+                            Take verse-linked notes, organize them into notebooks, and move through your study without
+                            losing context. Marginality is designed to feel close to the page, not layered on top of it.
+                        </p>
+                    </div>
+
+                    <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                        <Link
+                            href="/#product"
+                            className="inline-flex items-center justify-center rounded-2xl bg-primary px-6 py-3 text-sm font-semibold text-primary-content no-underline transition hover:brightness-[1.02]"
+                        >
+                            Explore the product
+                        </Link>
+                        <Link
+                            href="/#contact"
+                            className="inline-flex items-center justify-center rounded-2xl border px-6 py-3 text-sm font-semibold text-white no-underline transition hover:bg-white/8"
+                            style={{
+                                borderColor: 'rgba(255,255,255,0.18)',
+                                background: 'rgba(255,255,255,0.04)'
+                            }}
+                        >
+                            Contact us
+                        </Link>
+                    </div>
+
+                    <div
+                        className="mt-10 grid gap-5 border-t pt-6 sm:grid-cols-3"
+                        style={{ borderColor: 'rgba(255,255,255,0.12)' }}
+                    >
+                        <div>
+                            <p
+                                className="text-xs font-semibold uppercase tracking-[0.22em]"
+                                style={{ color: 'rgba(255,255,255,0.5)' }}
+                            >
+                                Built for
+                            </p>
+                            <p className="mt-2 text-sm leading-6" style={{ color: 'rgba(255,255,255,0.72)' }}>
+                                People whose goal is to grow in their understanding of Scripture.
+                            </p>
+                        </div>
+                        <div>
+                            <p
+                                className="text-xs font-semibold uppercase tracking-[0.22em]"
+                                style={{ color: 'rgba(255,255,255,0.5)' }}
+                            >
+                                Focus
+                            </p>
+                            <p className="mt-2 text-sm leading-6" style={{ color: 'rgba(255,255,255,0.72)' }}>
+                                Notes, organization, and cross-reference access that stay close to the page.
+                            </p>
+                        </div>
+                        <div>
+                            <p
+                                className="text-xs font-semibold uppercase tracking-[0.22em]"
+                                style={{ color: 'rgba(255,255,255,0.5)' }}
+                            >
+                                Availability
+                            </p>
+                            <p className="mt-2 text-sm leading-6" style={{ color: 'rgba(255,255,255,0.72)' }}>
+                                Mobile, desktop, and web experiences are currently being built and refined.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <HeroPreviewToggle />
+            </div>
+        </section>
+    );
+}
+
+function ProductSection() {
+    return (
+        <section id="product" className="bg-[var(--paper)]">
+            <div className="mx-auto grid max-w-6xl gap-12 px-6 py-[4.5rem] md:px-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:items-start">
+                <div className="max-w-xl">
+                    <p
+                        className="text-sm font-semibold uppercase tracking-[0.28em]"
+                        style={{ color: 'rgba(43, 50, 55, 0.55)' }}
+                    >
+                        What It Is
+                    </p>
+                    <h2 className="mt-5 max-w-[12ch] text-4xl leading-tight text-[var(--ink-deep)]">
+                        A note-taking system shaped around Scripture.
+                    </h2>
+                    <p className="mt-5 text-base leading-7" style={{ color: 'rgba(43, 50, 55, 0.76)' }}>
+                        Keep reading, writing, and organizing in one place without turning study into a cluttered
+                        workflow.
+                    </p>
+
+                    <div className="mt-8 space-y-4">
+                        {[
+                            'Verse-linked entries with clean, formatted references.',
+                            'Notebook and tag organization for long-running studies.',
+                            'Inline reference buttons that preserve context inside notes.',
+                            'Export paths for sharing or moving your work when needed.'
+                        ].map((item) => (
+                            <div key={item} className="flex gap-3 border-t pt-4" style={{ borderColor: 'var(--line)' }}>
+                                <span className="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-primary" />
+                                <p className="text-sm leading-6" style={{ color: 'rgba(43, 50, 55, 0.76)' }}>
+                                    {item}
+                                </p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                    {productShots.map((shot, index) => (
+                        <div
+                            key={shot.src}
+                            className="overflow-hidden rounded-[1.75rem] border p-3 shadow-[0_24px_60px_-42px_rgba(35,38,44,0.55)]"
+                            style={{
+                                borderColor: 'var(--line)',
+                                background: index % 2 === 0 ? 'rgba(241,243,246,0.86)' : 'rgba(233,237,243,0.92)'
+                            }}
+                        >
+                            <Image
+                                src={shot.src}
+                                alt={shot.alt}
+                                width={shot.width}
+                                height={shot.height}
+                                className="h-auto w-full rounded-[1.15rem] border border-black/5 object-contain"
+                                sizes="(min-width: 768px) 320px, 45vw"
+                                loading="lazy"
+                            />
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+}
 
 function FeaturesSection() {
     return (
-        <section id="features" className="bg-slate-50">
-        <div className="mx-auto max-w-6xl px-4 py-16">
-            <h2 className="text-2xl font-semibold text-slate-900">Key features</h2>
-            <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map((feature) => (
-                <div key={feature.title} className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm">
-                <h3 className="font-semibold text-slate-900">{feature.title}</h3>
-                <p className="mt-2 text-sm text-slate-700">{feature.description}</p>
+        <section id="features" className="bg-[var(--ink-deep)] text-white">
+            <div className="mx-auto max-w-6xl px-6 py-[4.5rem] md:px-8">
+                <div className="max-w-2xl">
+                    <p className="text-sm font-semibold uppercase tracking-[0.28em] text-white/50">Key Features</p>
+                    <h2 className="mt-5 max-w-[12ch] text-4xl leading-tight text-white">Your Bible, your notes.</h2>
+                    <p className="mt-5 text-base leading-7 text-white/70">
+                        Notes, references, and study tools stay tied to Scripture instead of being scattered across
+                        separate screens.
+                    </p>
                 </div>
-            ))}
+
+                <div className="mt-12 grid gap-x-10 gap-y-8 md:grid-cols-2">
+                    {features.map((feature, index) => (
+                        <div
+                            key={feature.title}
+                            className="border-t pt-5"
+                            style={{ borderColor: 'rgba(255,255,255,0.12)' }}
+                        >
+                            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-primary">
+                                {String(index + 1).padStart(2, '0')}
+                            </p>
+                            <h3 className="mt-3 text-xl font-semibold text-white">{feature.title}</h3>
+                            <p className="mt-3 max-w-xl text-sm leading-6 text-white/68">{feature.description}</p>
+                        </div>
+                    ))}
+                </div>
             </div>
-        </div>
         </section>
     );
 }
 
-/* -------------------- ABOUT -------------------- */
 function AboutSection() {
     return (
-        <section id="about" className="bg-white">
-        <div className="mx-auto grid max-w-6xl items-start gap-12 px-4 py-16 md:grid-cols-2">
-            <div>
-            <h2 className="text-2xl font-semibold text-slate-900">About Spark Digital LLC</h2>
-            <p className="mt-4 text-slate-700">
-                Spark Digital LLC is the publisher and developer of Marginality. Our aim with Marginality is build tools that help people engage
-                Scripture deeply—with clarity, order, and reverence.
-            </p>
-            <ul className="mt-4 list-disc space-y-2 pl-5 text-slate-700">
-                <li>Privately held U.S. company</li>
-                <li>Focus: Bible study software and research tools</li>
-                <li>
-                Contact:{" "}
-                <a href="mailto:contact@marginality.app" className="text-primary underline-offset-4">
-                    contact@marginality.app
-                </a>
-                </li>
-            </ul>
+        <section id="about" className="bg-[var(--paper-soft)]">
+            <div className="mx-auto grid max-w-6xl gap-12 px-6 py-[4.5rem] md:px-8 lg:grid-cols-[minmax(0,1fr)_minmax(280px,0.7fr)]">
+                <div>
+                    <p
+                        className="text-sm font-semibold uppercase tracking-[0.28em]"
+                        style={{ color: 'rgba(43, 50, 55, 0.55)' }}
+                    >
+                        About
+                    </p>
+                    <h2 className="mt-5 text-4xl leading-tight text-[var(--ink-deep)]">
+                        Built for deeper, organized study.
+                    </h2>
+                    <p className="mt-5 max-w-2xl text-base leading-7" style={{ color: 'rgba(43, 50, 55, 0.76)' }}>
+                        Marginality is for readers who want a clearer way to return to passages, hold onto their
+                        thoughts, and keep study ordered over time.
+                    </p>
+                </div>
+
+                <div
+                    className="rounded-[1.75rem] border p-6"
+                    style={{
+                        borderColor: 'var(--line)',
+                        background: 'rgba(255,255,255,0.6)'
+                    }}
+                >
+                    <h3 className="text-lg font-semibold text-[var(--ink-deep)]">Licensing and permissions</h3>
+                    <p className="mt-3 text-sm leading-6" style={{ color: 'rgba(43, 50, 55, 0.74)' }}>
+                        Biblical content, translation rights, and quotation notices are handled with attention to
+                        publisher requirements and permissions.
+                    </p>
+                    <ul className="mt-5 space-y-3 text-sm leading-6" style={{ color: 'rgba(43, 50, 55, 0.74)' }}>
+                        <li>Translation and copyright notices will be credited per publisher guidelines.</li>
+                        <li>All trademarks remain the property of their respective owners.</li>
+                        <li>Licensing questions can be directed through the contact form below.</li>
+                    </ul>
+                </div>
             </div>
-            <div className="rounded-2xl border border-slate-100 bg-slate-50 p-6">
-            <h3 className="font-semibold text-slate-900">Licensing & permissions</h3>
-            <p className="mt-2 text-sm text-slate-700">
-                We pursue appropriate permissions for biblical content and translations. For licensing inquiries, please reach
-                out below. Placeholder notices:
-            </p>
-            <ul className="mt-3 list-disc space-y-1 pl-5 text-xs text-slate-600">
-                <li>Scripture quotations (translation names and copyright) will be credited per publisher guidelines.</li>
-                <li>All trademarks are the property of their respective owners.</li>
-            </ul>
-            </div>
-        </div>
         </section>
     );
 }
 
-/* -------------------- CONTACT -------------------- */
 function ContactSection() {
     return (
-        <section id="contact" className="bg-slate-50">
-        <div className="mx-auto grid max-w-6xl items-start gap-12 px-4 py-16 md:grid-cols-2">
-            <div>
-            <h2 className="text-2xl font-semibold text-slate-900">Get in touch</h2>
-            <p className="mt-4 text-slate-700">For licensing, partnerships, or product questions, email us or use the form.</p>
-            <div className="mt-6 space-y-1 text-sm text-slate-700">
-                <p>
-                <span className="font-medium">Email:</span>{" "}
-                <a className="text-primary underline-offset-4" href="mailto:contact@marginality.app">
-                    contact@marginality.app
-                </a>
-                </p>
-                <p>
-                <span className="font-medium">Company:</span> Spark Digital LLC
-                </p>
-            </div>
-            </div>
-            <form
-            name="contact"
-            method="POST"
-            data-netlify="true"
-            className="rounded-2xl border border-slate-100 bg-white p-6 shadow-sm"
-            >
-            <input type="hidden" name="form-name" value="contact" />
-            <div className="grid gap-4">
-                <label className="text-sm text-slate-700">
-                Your name
-                <input
-                    name="name"
-                    required
-                    className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-[#e4cdd5]"
-                />
-                </label>
-                <label className="text-sm text-slate-700">
-                Email
-                <input
-                    type="email"
-                    name="email"
-                    required
-                    className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-[#e4cdd5]"
-                />
-                </label>
-                <label className="text-sm text-slate-700">
-                Message
-                <textarea
-                    name="message"
-                    rows={5}
-                    required
-                    className="mt-1 w-full rounded-xl border border-slate-300 px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-2 focus:ring-[#e4cdd5]"
-                />
-                </label>
-                <button
-                className="rounded-xl bg-primary px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-primary/85"
-                type="submit"
+        <section id="contact" className="bg-[var(--ink-deep)] text-white">
+            <div className="mx-auto grid max-w-6xl gap-12 px-6 py-[4.5rem] md:px-8 lg:grid-cols-[minmax(0,0.88fr)_minmax(0,1.12fr)] lg:items-start">
+                <div className="max-w-xl">
+                    <p
+                        className="text-sm font-semibold uppercase tracking-[0.28em]"
+                        style={{ color: 'rgba(255, 255, 255, 0.55)' }}
+                    >
+                        Contact
+                    </p>
+                    <h2 className="mt-5 max-w-[10ch] text-4xl leading-tight text-white">
+                        Reach out about licensing, partnerships, or product questions.
+                    </h2>
+                    <p className="mt-5 text-base leading-7" style={{ color: 'rgba(255, 255, 255, 0.76)' }}>
+                        If you are exploring licensing, publishing alignment, partnerships, or early access, use the
+                        form and include whatever context would be helpful.
+                    </p>
+
+                    <div className="mt-8 space-y-3 text-sm" style={{ color: 'rgba(255, 255, 255, 0.78)' }}>
+                        <p>
+                            <span className="font-semibold text-white">Email:</span>{' '}
+                            <a href="mailto:contact@marginality.app" className="text-primary">
+                                contact@marginality.app
+                            </a>
+                        </p>
+                        <p>
+                            <span className="font-semibold text-white">Company:</span> Spark Digital LLC
+                        </p>
+                    </div>
+                </div>
+
+                <form
+                    name="contact"
+                    method="POST"
+                    data-netlify="true"
+                    className="rounded-[2rem] border p-6 shadow-[0_28px_70px_-48px_rgba(35,38,44,0.7)] sm:p-8"
+                    style={{
+                        borderColor: 'rgba(255,255,255,0.08)',
+                        background: 'linear-gradient(180deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.02) 100%)'
+                    }}
                 >
-                Send
-                </button>
+                    <input type="hidden" name="form-name" value="contact" />
+                    <div className="grid gap-5">
+                        <label className="text-sm text-white/80">
+                            Your name
+                            <input
+                                name="name"
+                                required
+                                className="mt-2 w-full rounded-2xl border border-white/10 bg-white/95 px-4 py-3 text-sm text-[var(--ink-deep)] focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/35"
+                            />
+                        </label>
+                        <label className="text-sm text-white/80">
+                            Email
+                            <input
+                                type="email"
+                                name="email"
+                                required
+                                className="mt-2 w-full rounded-2xl border border-white/10 bg-white/95 px-4 py-3 text-sm text-[var(--ink-deep)] focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/35"
+                            />
+                        </label>
+                        <label className="text-sm text-white/80">
+                            Message
+                            <textarea
+                                name="message"
+                                rows={5}
+                                required
+                                className="mt-2 w-full rounded-2xl border border-white/10 bg-white/95 px-4 py-3 text-sm text-[var(--ink-deep)] focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/35"
+                            />
+                        </label>
+                        <button
+                            className="rounded-2xl bg-primary px-5 py-3 text-sm font-semibold text-primary-content transition hover:brightness-[1.02]"
+                            type="submit"
+                        >
+                            Send message
+                        </button>
+                    </div>
+                </form>
             </div>
-            </form>
-        </div>
         </section>
     );
 }
 
-/* -------------------- PAGE (single default export) -------------------- */
-function Page() {
+export default function Page() {
     return (
-        <div className="bg-white text-slate-800">
-        <HeroSection />
-        <ProductSection />
-        <FeaturesSection />
-        <AboutSection />
-        <ContactSection />
+        <div className="bg-[var(--paper-bright)] text-[var(--ink)]">
+            <HeroSection />
+            <ProductSection />
+            <FeaturesSection />
+            <AboutSection />
+            <ContactSection />
         </div>
     );
 }
-
-export default Page;

@@ -9,8 +9,7 @@ export const metadata = {
         'Marginality is a modern Bible study app by Spark Digital LLC that enables verse-linked margins, organized notebooks, and collaborative studies.',
     openGraph: {
         title: 'Marginality — Bible Study with Living Margins',
-        description:
-            'A modern way to study Scripture with verse-linked margins, notebooks, and collaborative studies.',
+        description: 'A modern way to study Scripture with verse-linked margins, notebooks, and collaborative studies.',
         type: 'website',
         url: 'https://marginality.app',
         images: [
@@ -37,7 +36,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
     return (
         <html lang="en">
-            <body className="antialiased bg-white text-slate-900">
+            <body className="antialiased" style={{ background: 'var(--paper-bright)', color: 'var(--ink-deep)' }}>
                 <div className="flex min-h-screen flex-col">
                     <Header />
                     <main className="flex-1">{children}</main>
