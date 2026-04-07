@@ -56,24 +56,64 @@ export default async function Page() {
 }
 
 async function RandomWikiArticle() {
-    const randomWiki = await fetch(randomWikiUrl, {
-        next: { revalidate: revalidateTTL, tags: [tagName] }
-    });
+    let randomWiki;
+    try {
+        randomWiki = await fetch(randomWikiUrl, {
+            headers: {
+                accept: 'application/json'
+            },
+            next: { revalidate: revalidateTTL, tags: [tagName] }
+        });
+    } catch {
+        return (
+            <Card className="max-w-2xl">
+                <h3 className="text-2xl text-neutral-900">Wikipedia preview unavailable</h3>
+                <p className="italic">The random article service could not be reached. Try revalidating again later.</p>
+            </Card>
+        );
+    }
 
-    const content = await randomWiki.json();
-    let extract = content.extract;
+    const contentType = randomWiki.headers.get('content-type') ?? '';
+    if (!randomWiki.ok || !contentType.includes('application/json')) {
+        return (
+            <Card className="max-w-2xl">
+                <h3 className="text-2xl text-neutral-900">Wikipedia preview unavailable</h3>
+                <p className="italic">
+                    The random article service returned an unexpected response. Try revalidating again later.
+                </p>
+            </Card>
+        );
+    }
+
+    let content;
+    try {
+        content = await randomWiki.json();
+    } catch {
+        return (
+            <Card className="max-w-2xl">
+                <h3 className="text-2xl text-neutral-900">Wikipedia preview unavailable</h3>
+                <p className="italic">
+                    The random article service returned data that could not be read. Try revalidating again later.
+                </p>
+            </Card>
+        );
+    }
+
+    let extract = content.extract ?? '';
     if (extract.length > maxExtractLength) {
         extract = extract.slice(0, extract.slice(0, maxExtractLength).lastIndexOf(' ')) + ' [...]';
     }
 
     return (
         <Card className="max-w-2xl">
-            <h3 className="text-2xl text-neutral-900">{content.title}</h3>
-            <div className="text-lg font-bold">{content.description}</div>
+            <h3 className="text-2xl text-neutral-900">{content.title ?? 'Random Wikipedia article'}</h3>
+            <div className="text-lg font-bold">{content.description ?? 'No description available.'}</div>
             <p className="italic">{extract}</p>
-            <a target="_blank" rel="noopener noreferrer" href={content.content_urls.desktop.page}>
-                From Wikipedia
-            </a>
+            {content.content_urls?.desktop?.page ? (
+                <a target="_blank" rel="noopener noreferrer" href={content.content_urls.desktop.page}>
+                    From Wikipedia
+                </a>
+            ) : null}
         </Card>
     );
 }
