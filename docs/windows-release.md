@@ -4,7 +4,7 @@ This site now exposes a public Windows download page at `/download/windows` and 
 
 ## What gets hosted where
 
-- Keep the source code in the app repo: `/Users/phoenixparks/Projects/Marginally-master`
+- Keep the source code and packaging files in the app repo: `C:\Users\phoen\Desktop\marginality_app`
 - Keep the installer binary out of git
 - Host the actual `.msi` file at a public, versioned `https://` URL under the Marginality domain or another storage endpoint you control
 
@@ -17,20 +17,30 @@ Recommended file naming:
 
 You need a Windows machine for the installer step.
 
-1. On Windows, build the app:
+1. In `C:\Users\phoen\Desktop\marginality_app`, build the Windows MSI with the repeatable packaging script:
 
-   ```bash
-   flutter build windows --release
+   ```powershell
+   .\tool\build_windows_msi.ps1
    ```
 
-2. Wrap the release output in an MSI installer.
+2. The installer packaging is defined in the app repo:
 
-   Preferred options:
+   - `tool/build_windows_msi.ps1`
+   - `installer/windows/Package.wxs`
 
-   - WiX Toolset
-   - Advanced Installer
+3. The Windows app identity should remain aligned with the installed product name `Marginality`:
 
-3. Sign the MSI if you have a code-signing certificate.
+   - `windows/CMakeLists.txt`
+   - `windows/runner/Runner.rc`
+
+4. Sign the MSI if you have a code-signing certificate.
+
+## Current release
+
+Current artifact details for the first public Windows installer:
+
+- File: `marginality-1.0.0-x64.msi`
+- SHA-256: `ed95e70e2563c522e47089551e5e5b578e4c7e7b99dac1b2f6b06698066a0748`
 
 ## Website configuration
 
@@ -51,7 +61,7 @@ Example values:
 WINDOWS_INSTALLER_URL=https://marginality.app/downloads/marginality-1.0.0-x64.msi
 WINDOWS_INSTALLER_VERSION=1.0.0
 WINDOWS_INSTALLER_UPDATED_AT=2026-04-14
-WINDOWS_INSTALLER_SHA256=<sha256>
+WINDOWS_INSTALLER_SHA256=ed95e70e2563c522e47089551e5e5b578e4c7e7b99dac1b2f6b06698066a0748
 WINDOWS_INSTALLER_NOTES_URL=https://marginality.app/about
 ```
 
